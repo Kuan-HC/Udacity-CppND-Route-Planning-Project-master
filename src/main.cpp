@@ -66,6 +66,7 @@ int main(int argc, const char **argv)
     std::getline(std::cin, line);
     std::istringstream my_stream(line);
     my_stream >> start_x >> start_y >> end_x >> end_y;
+    std::cout << "start_x is:" <<start_x<<" start_y is:"<<start_y<<"end_x is:" <<end_x<<" end_y is:"<<end_y<<std::endl;
     /* TODO 1 */
     
     // Build Model.

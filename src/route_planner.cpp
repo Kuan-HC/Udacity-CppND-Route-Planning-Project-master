@@ -63,7 +63,7 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
 /* compare function for sort() */
 bool cmp_obj(const RouteModel::Node *a, const RouteModel::Node *b)
 {
-    return (a->h_value + a->g_value) > (b->h_value + b->g_value);
+    return (a->h_value + a->g_value) < (b->h_value + b->g_value);
 }
 
 RouteModel::Node *RoutePlanner::NextNode()
@@ -91,7 +91,6 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
 
     // TODO: Implement your solution here.
     /* TODO 6 */
-
     while (current_node->x != start_node->x || current_node->y != start_node->y)
     {
         path_found.push_back(*current_node);
@@ -121,4 +120,24 @@ void RoutePlanner::AStarSearch()
     RouteModel::Node *current_node = nullptr;
 
     // TODO: Implement your solution here.
+    /* TODO 7 */
+    start_node->visited = true;
+    start_node->g_value = 0.0f;
+    start_node->h_value = CalculateHValue(start_node);
+    open_list.push_back(start_node);
+    
+    while(!open_list.empty())
+    {
+        current_node = NextNode();
+        if (current_node->x == end_node->x && current_node->y == end_node->y)
+        {
+            m_Model.path = ConstructFinalPath(current_node);
+            std::cout << "Search Finished!" << std::endl;
+        }
+        else
+        {
+            AddNeighbors(current_node);
+        }
+    }
+    
 }
