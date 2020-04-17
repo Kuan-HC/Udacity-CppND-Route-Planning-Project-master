@@ -71,6 +71,7 @@ RouteModel::Node *RoutePlanner::NextNode()
     sort(open_list.begin(), open_list.end(), cmp_obj);
     RouteModel::Node *output = open_list.back();
     open_list.pop_back();
+
     return output;
 }
 /* TODO 5 */
@@ -98,7 +99,6 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
         distance += current_node->g_value - tmp_parent->g_value;
         current_node = tmp_parent;
     }
-
     path_found.push_back(*current_node);  /* add start node to vector */
     reverse(path_found.begin(), path_found.end());
 
